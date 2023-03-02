@@ -14,6 +14,8 @@ private let reuseIdentifier = "cellButton"
     //MARK: Enum
 enum Link: String {
     case urlWeather = "https://rapidapi.com/blog/access-global-weather-data-with-these-weather-apis/"
+    case urlButtonTwo = "https://apod.nasa.gov/apod/image/2303/FlamingStarComet_Roell_1080.jpg"
+    case urlButtonThree = "https://swapi.dev/api/planets/3/"
 }
 
 enum ActionButton: String, CaseIterable {
@@ -47,7 +49,7 @@ final class CollectionViewController: UICollectionViewController {
         let actionButton = actionButton[indexPath.item]
         
         switch actionButton {
-        case .buttonOne: performSegue(withIdentifier: "secondViewSegue", sender: nil)
+        case .buttonOne: fetchButtonOne()
         case .buttonTwo: fetchButtonTwo()
         case .buttonThree: fetchButtonThree()
         }
@@ -56,7 +58,7 @@ final class CollectionViewController: UICollectionViewController {
 
     
    //MARK: Private Alert
-    private func succesedAlert() {
+    private func succesAlert() {
         DispatchQueue.main.async {
             let alert = UIAlertController(
                 title: "Succesed",
@@ -93,9 +95,28 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension CollectionViewController {
+    func fetchButtonOne() {
+        
+    }
     
     func fetchButtonTwo() {
+        guard let url = URL(string: Link.urlButtonTwo.rawValue) else { return }
         
+        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let data = data, let response = response else {
+                print(error?.localizedDescription ?? "No error")
+                return
+            }
+            
+            do {
+                let dataButtonTwo = try JSONDecoder().decode(DataButtonTwo.self, from: data)
+                self?.succesAlert()
+            } catch let error {
+                print(error.localizedDescription)
+                self?.fieledAlert()
+            }
+            
+        }.resume()
     }
     
     func fetchButtonThree() {

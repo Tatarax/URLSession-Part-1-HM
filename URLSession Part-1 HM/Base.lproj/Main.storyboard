@@ -3,8 +3,6 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -56,7 +54,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <outlet property="actionButtonLabel" destination="iLY-1m-7ag" id="w1i-cO-5St"/>
+                                    <outlet property="actionButtonLabel" destination="iLY-1m-7ag" id="PjV-xz-pni"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -98,38 +96,5 @@
             </objects>
             <point key="canvasLocation" x="-1127" y="118"/>
         </scene>
-        <!--Second View Controller-->
-        <scene sceneID="0sQ-SD-osa">
-            <objects>
-                <viewController id="5A5-fD-ltA" customClass="SecondViewController" customModule="URLSession_Part_1_HM" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5mw-Ll-L39">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ZnV-gq-6iL">
-                                <rect key="frame" x="178" y="420" width="37" height="37"/>
-                            </activityIndicatorView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="sPV-Tb-Zu5"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="ZnV-gq-6iL" firstAttribute="centerX" secondItem="sPV-Tb-Zu5" secondAttribute="centerX" id="PEm-UP-9nQ"/>
-                            <constraint firstItem="ZnV-gq-6iL" firstAttribute="centerY" secondItem="sPV-Tb-Zu5" secondAttribute="centerY" id="hgX-E5-Raf"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="RNs-A5-bJH"/>
-                    <connections>
-                        <outlet property="activityIndicator" destination="ZnV-gq-6iL" id="46D-Ne-Ej1"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GRx-lg-jsE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="465" y="-314"/>
-        </scene>
     </scenes>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>
