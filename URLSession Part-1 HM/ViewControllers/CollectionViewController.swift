@@ -13,9 +13,9 @@ private let reuseIdentifier = "cellButton"
 
     //MARK: Enum
 enum Link: String {
-    case urlWeather = "https://rapidapi.com/blog/access-global-weather-data-with-these-weather-apis/"
-    case urlButtonTwo = "https://apod.nasa.gov/apod/image/2303/FlamingStarComet_Roell_1080.jpg"
-    case urlButtonThree = "https://swapi.dev/api/planets/3/"
+    case urlButtonOne = "https://jservice.io" //https://anapioficeandfire.com
+    case urlButtonTwo = "https://go-apod.herokuapp.com/apod"
+    case urlButtonThree = "https://swapi.dev/api/planets/3/?format=json"
 }
 
 enum ActionButton: String, CaseIterable {
@@ -67,7 +67,7 @@ final class CollectionViewController: UICollectionViewController {
             
             let okAction = UIAlertAction(title: "OK", style: .default)
             alert.addAction(okAction)
-            alert.present(alert, animated: true)
+            self.present(alert, animated: true)
         }
     }
         
@@ -80,7 +80,7 @@ final class CollectionViewController: UICollectionViewController {
                 
                 let okAction = UIAlertAction(title: "OK", style: .default)
                 alert.addAction(okAction)
-                alert.present(alert, animated: true)
+                self.present(alert, animated: true)
             }
         }
 
@@ -96,7 +96,27 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
 
 extension CollectionViewController {
     func fetchButtonOne() {
+        guard let url = URL(string: Link.urlButtonOne.rawValue) else { return }
         
+        let session = URLSession(configuration: .default)
+        
+        let task = session.dataTask(with: url) { data, _, error in
+            guard let data = data else {
+                print(error?.localizedDescription ?? "Error")
+                return
+            }
+            
+            let jsonDecoder = JSONDecoder()
+            
+            do {
+                let dataButtonOne = try jsonDecoder.decode(DataButtonOne.self, from: data)
+                self.succesAlert()
+            } catch {
+                print(error.localizedDescription)
+                self.fieledAlert()
+            }
+        }
+        task.resume()
     }
     
     func fetchButtonTwo() {
@@ -104,22 +124,48 @@ extension CollectionViewController {
         
         URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             guard let data = data, let response = response else {
-                print(error?.localizedDescription ?? "No error")
+                print(error?.localizedDescription ?? "Error")
                 return
             }
             
             do {
                 let dataButtonTwo = try JSONDecoder().decode(DataButtonTwo.self, from: data)
+                print(dataButtonTwo)
                 self?.succesAlert()
+                
             } catch let error {
                 print(error.localizedDescription)
                 self?.fieledAlert()
+               
+                
             }
             
         }.resume()
     }
     
     func fetchButtonThree() {
+        guard let url = URL(string: Link.urlButtonThree.rawValue) else { return }
         
+        let session = URLSession(configuration: .default)
+        
+        let task = session.dataTask(with: url) { data, _, error in
+            guard let data = data else {
+                print(error?.localizedDescription ?? "No error")
+                return
+        }
+            
+            let jsonDecoder = JSONDecoder()
+            
+            do {
+                let dataButtonThree = try jsonDecoder.decode(DataButtonThree.self, from: data)
+                self.succesAlert()
+            } catch {
+                print(error.localizedDescription)
+                self.fieledAlert()
+            }
+            
+            
+        }
+        task.resume()
     }
 }
